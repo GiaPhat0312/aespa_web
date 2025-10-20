@@ -28,15 +28,17 @@ body {
 
 /* --- CSS cho khung nội dung chính --- */
 .container {
-    max-width: 960px;
-    margin: 60px auto;
-    background-color: var(--primary-color);
+    max-width: 1200px;
+    margin: 40px auto; /* Điều chỉnh margin nếu cần để có thêm không gian */
     padding: 30px;
+    background-color: rgba(17, 17, 17, 0.8); /* MÀU NỀN MỚI: Đen (#111) với độ trong suốt 80% */
     border-radius: 15px;
-    border: 1px solid var(--border-color);
-    box-shadow: 0 0 30px rgba(174, 71, 255, 0.1);
-    position: relative;
-    z-index: 1;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+    position: relative; /* Giữ content nằm trên lớp phủ video */
+    z-index: 1; /* Đảm bảo content nằm trên video background */
+}
+.group-info {
+    background-color: transparent; /* Không có màu nền riêng */
 }
 
 h1, h2 {
@@ -760,4 +762,42 @@ a.album-link {
     color: #fff;
     font-size: 2.5em;
     cursor: pointer;
+}
+/* --- MÃ MỚI: VIDEO BACKGROUND --- */
+
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.video-background video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* LỚP PHỦ MÀU ĐEN MỜ (Rất quan trọng để chữ dễ đọc) */
+.video-background::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* Tùy chọn: Tắt video trên di động để tiết kiệm data */
+@media (max-width: 768px) {
+    .video-background {
+        display: none;
+    }
+    body {
+        background-color: #111;
+    }
 }

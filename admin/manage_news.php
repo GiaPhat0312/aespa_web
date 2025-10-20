@@ -9,6 +9,7 @@ $result = $conn->query("SELECT id, title, created_at FROM news ORDER BY created_
     <meta charset="UTF-8">
     <title>Quản Lý Tin Tức | Admin</title>
     <link rel="stylesheet" href="../css/styleAdmin.css">
+    <link rel="icon" type="image/png" href="images/favicon.png">
 </head>
 <body>
     <div id="particles-js"></div>
