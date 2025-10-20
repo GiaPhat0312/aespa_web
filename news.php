@@ -17,7 +17,7 @@ $result = $conn->query("SELECT id, title, content, image, created_at FROM news O
 
     <main id="swup" class="transition-fade">
         <div class="container">
-            <h1>aespa News Update</h1>
+            <h1>Tin Tức Mới Nhất Về Aespa</h1>
             <p style="text-align: center; color: var(--text-secondary); margin-top: -20px;">
                 Cập nhật tin tức và hoạt động mới nhất của aespa.
             </p>

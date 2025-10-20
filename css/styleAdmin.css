@@ -361,3 +361,22 @@ hr.form-separator {
         grid-template-columns: 1fr; /* Chuyển thành 1 cột */
     }
 }
+/* --- MÃ MỚI: SỬA LỖI BẢNG VÀ ẢNH THUMBNAIL --- */
+
+/* Định dạng cho ảnh thumbnail trong bảng */
+.table-thumbnail {
+    width: 60px;          /* Chiều rộng cố định 60px */
+    height: 60px;         /* Chiều cao cố định 60px */
+    object-fit: cover;    /* Đảm bảo ảnh không bị méo */
+    border-radius: 8px;   /* Bo góc nhẹ */
+    border: 1px solid var(--border-color);
+    display: block;
+    margin: 0 auto;       /* Căn giữa ảnh trong ô */
+}
+
+/* Đảm bảo các ô trong bảng được căn giữa theo chiều dọc */
+.admin-table td {
+    vertical-align: middle; /* Rất quan trọng để căn giữa nội dung và ảnh */
+    padding: 15px 20px;
+    border-top: 1px solid var(--border-color);
+}

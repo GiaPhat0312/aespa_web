@@ -30,6 +30,13 @@
                     <p>Đăng bài, cập nhật tin tức mới nhất.</p>
                 </div>
             </a>
+            <a href="merch/manage.php" class="dashboard-item-link">
+                <div class="dashboard-item">
+                    <svg class="dashboard-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 6H4V4H20V6M20.32 8H3.68L2 12V20H22V12L20.32 8M18 18H6V12.91L7.09 11H16.91L18 12.91V18M12 13C10.9 13 10 13.9 10 15H11.5C11.5 14.72 11.72 14.5 12 14.5S12.5 14.72 12.5 15H14C14 13.9 13.1 13 12 13Z"/></svg>
+                    <h3>Quản Lý Vật Phẩm</h3>
+                    <p>Trưng bày lightstick, photocard...</p>
+                </div>
+            </a>
         </div>
 
         <a href="logout.php" class="logout-btn">Đăng xuất</a> </div>

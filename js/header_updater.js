@@ -1,10 +1,9 @@
-// Lắng nghe sự kiện 'page:view' của Swup, sự kiện này được kích hoạt
-// ngay sau khi nội dung trang mới được đưa vào và sẵn sàng để xem.
-document.addEventListener('swup:page:view', () => {
-    // Lấy tên file của trang mới mà Swup vừa tải
+/**
+ * Hàm này sẽ tự động chạy mỗi khi Swup tải xong một trang mới.
+ * Nhiệm vụ của nó là tìm đúng mục menu và thêm class 'active' vào.
+ */
+function updateActiveNavlink() {
     const currentPagePath = window.location.pathname.split('/').pop();
-    
-    // Lấy tất cả các nút trên thanh điều hướng
     const navLinks = document.querySelectorAll('.main-nav a');
 
     navLinks.forEach(link => {
@@ -17,13 +16,22 @@ document.addEventListener('swup:page:view', () => {
         if (
             // Trường hợp 1: Link khớp chính xác với trang hiện tại
             linkPath === currentPagePath ||
-            // Trường hợp 2: Trang hiện tại là 'member.php' và link là 'index.php'
+            // Trường hợp 2: Trang con 'member.php' làm sáng trang cha 'index.php'
             (currentPagePath === 'member.php' && linkPath === 'index.php') ||
-            // Trường hợp 3: Trang hiện tại là 'album.php' và link là 'discography.php'
-            (currentPagePath === 'album.php' && linkPath === 'discography.php')
+            // Trường hợp 3: Trang con 'album.php' làm sáng trang cha 'discography.php'
+            (currentPagePath === 'album.php' && linkPath === 'discography.php') ||
+            // BỔ SUNG: Trang con 'post.php' làm sáng trang cha 'news.php'
+            (currentPagePath === 'post.php' && linkPath === 'news.php') ||
+            // SỬA LỖI: Thêm || và logic cho trang 'merch.php'
+            (currentPagePath.startsWith('merch.php') && linkPath === 'merch.php')
         ) {
-            // Thêm class 'active' vào đúng nút
             link.classList.add('active');
         }
     });
-});
+}
+
+// Lắng nghe sự kiện của Swup: 'page:view' nghĩa là "khi trang mới đã hiển thị xong"
+document.addEventListener('swup:page:view', updateActiveNavlink);
+
+// Chạy hàm một lần ngay khi trang được tải lần đầu, để đảm bảo đồng bộ
+document.addEventListener('DOMContentLoaded', updateActiveNavlink);
