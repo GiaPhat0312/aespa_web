@@ -31,15 +31,13 @@ body {
     max-width: 1200px;
     margin: 40px auto; /* Điều chỉnh margin nếu cần để có thêm không gian */
     padding: 30px;
-    background-color: rgba(17, 17, 17, 0.8); /* MÀU NỀN MỚI: Đen (#111) với độ trong suốt 80% */
+    background-color: transparent; /* MÀU NỀN MỚI: Đen (#111) với độ trong suốt 80% */
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
     position: relative; /* Giữ content nằm trên lớp phủ video */
     z-index: 1; /* Đảm bảo content nằm trên video background */
 }
-.group-info {
-    background-color: transparent; /* Không có màu nền riêng */
-}
+
 
 h1, h2 {
     text-align: center;

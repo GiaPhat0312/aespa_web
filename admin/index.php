@@ -39,7 +39,7 @@
             </a>
         </div>
 
-        <a href="logout.php" class="logout-btn">Đăng xuất</a> </div>
+        <a href="../logout.php" class="logout-btn">Đăng xuất</a> </div>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="../js/app.js"></script>
 </body>
