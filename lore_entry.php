@@ -29,45 +29,52 @@ $comments_result = $comments_stmt->get_result();
 ?>
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <title><?= htmlspecialchars($entry['term']) ?> | aespa Lore</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/png" href="images/favicon.png">
 </head>
-<body>
-    <div class="video-background">...</div>
-    <?php include 'partials/header.php'; ?>
-    <main id="swup" class="transition-fade">
-        <div class="container post-container"> 
-            <div class="back-link-container">
-                <a href="lore.php" class="back-link">Quay lại Bách Khoa Lore</a>
-            </div>
-            
-            <div class="post-full-content">
-                <div class="post-header">
-                    <h1 class="post-title"><?= htmlspecialchars($entry['term']) ?></h1>
-                </div>
-                
-                <img src="images/lore/<?= htmlspecialchars($entry['image']) ?>" alt="<?= htmlspecialchars($entry['term']) ?>" class="post-full-image">
-                
-                <div class="post-body">
-                    <?= $entry['full_description'] // Hiển thị nội dung từ TinyMCE ?>
-                </div>
-            </div>
 
-            <div class="comment-section">
-                <h2>Bình Luận (<?= $comments_result->num_rows ?>)</h2>
-                <form action="handle_comment.php" method="POST" class="comment-form">
-                    <input type="hidden" name="page_type" value="lore">
-                    <input type="hidden" name="item_id" value="<?= $entry_id ?>">
-                    
-                    </form>
-                <div class="comment-list">
+<body>
+    <div class="video-background">
+        <video autoplay loop muted playsinline>
+            <source src="videos/1021.mp4" type="video/mp4">
+        </video>
+        <?php include 'partials/header.php'; ?>
+        <main id="swup" class="transition-fade">
+            <div class="container post-container">
+                <div class="back-link-container">
+                    <a href="lore.php" class="back-link">Quay lại Bách Khoa Lore</a>
+                </div>
+
+                <div class="post-full-content">
+                    <div class="post-header">
+                        <h1 class="post-title"><?= htmlspecialchars($entry['term']) ?></h1>
                     </div>
+
+                    <img src="images/lore/<?= htmlspecialchars($entry['image']) ?>" alt="<?= htmlspecialchars($entry['term']) ?>" class="post-full-image">
+
+                    <div class="post-body">
+                        <?= $entry['full_description'] // Hiển thị nội dung từ TinyMCE 
+                        ?>
+                    </div>
+                </div>
+
+                <div class="comment-section">
+                    <h2>Bình Luận (<?= $comments_result->num_rows ?>)</h2>
+                    <form action="handle_comment.php" method="POST" class="comment-form">
+                        <input type="hidden" name="page_type" value="lore">
+                        <input type="hidden" name="item_id" value="<?= $entry_id ?>">
+
+                    </form>
+                    <div class="comment-list">
+                    </div>
+                </div>
             </div>
-        </div>
-    </main>
-    </body>
+        </main>
+</body>
+
 </html>
 <?php
 $comments_stmt->close();

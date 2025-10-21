@@ -45,7 +45,7 @@ $photos = $photo_sql->get_result();
     <link rel="icon" type="image/png" href="images/favicon.png">
 </head>
 <body>
-    <div class="video-background"> <video autoplay loop muted playsinline><source src="videos/bg-supernova.mp4" type="video/mp4"></video>
+    <div class="video-background"> <video autoplay loop muted playsinline><source src="videos/1021.mp4" type="video/mp4"></video>
     </div>
 
     <?php include 'partials/header.php'; ?>
