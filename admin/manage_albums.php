@@ -10,12 +10,14 @@ $result = $conn->query($sql);
 
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <title>Quản Lý Album | Admin</title>
     <link rel="stylesheet" href="../css/styleAdmin.css">
     <link rel="icon" type="image/png" href="images/favicon.png">
 </head>
+
 <body>
     <div id="particles-js"></div>
 
@@ -41,7 +43,7 @@ $result = $conn->query($sql);
             <tbody>
                 <?php
                 if ($result->num_rows > 0) {
-                    while($album = $result->fetch_assoc()) {
+                    while ($album = $result->fetch_assoc()) {
                         echo "<tr>";
                         echo "<td>" . htmlspecialchars($album['title']) . "</td>";
                         echo "<td>" . htmlspecialchars($album['type']) . "</td>";
@@ -49,7 +51,7 @@ $result = $conn->query($sql);
                         echo '<td class="actions">';
                         // Các nút Sửa/Xóa sẽ được thêm chức năng sau
                         echo '  <a href="edit_album.php?id=' . $album['id'] . '" class="action-btn edit">Sửa</a>';
-                        echo '  <a href="#" class="action-btn delete">Xóa</a>';
+                        echo '  <a href="delete_albums.php?id=' . $album['id'] . '" class="action-btn delete" onclick="return confirm(\'Bạn có chắc chắn muốn xóa album này? MỌI BÀI HÁT TRONG ALBUM SẼ BỊ XÓA!\');">Xóa</a>';
                         echo '</td>';
                         echo "</tr>";
                     }
@@ -64,5 +66,6 @@ $result = $conn->query($sql);
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="../js/app.js"></script>
 </body>
+
 </html>
 <?php $conn->close(); ?>

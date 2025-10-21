@@ -17,9 +17,9 @@ $result = $conn->query("SELECT id, term, summary, image FROM lore_entries ORDER 
     <?php include 'partials/header.php'; ?>
     <main id="swup" class="transition-fade">
         <div class="container">
-            <h1>aespa Universe Encyclopedia</h1>
+            <h1>Aespa Universe </h1>
             <p style="text-align: center; color: var(--text-secondary); margin-top: -20px;">
-                Giải mã các thuật ngữ và khái niệm trong vũ trụ aespa.
+                Vũ trụ aespa.
             </p>
             
             <div class="merch-grid" style="margin-top: 40px;">
