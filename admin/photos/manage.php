@@ -2,14 +2,22 @@
 require_once '../auth.php';
 require_once '../../config/database.php';
 
-// Lấy ảnh, JOIN với bảng members để lấy tên thành viên
-$sql = "
-    SELECT p.id, p.image_url, p.caption, m.stage_name 
-    FROM photos p
-    JOIN members m ON p.member_id = m.id
-    ORDER BY p.uploaded_at DESC
-";
-$result = $conn->query($sql);
+// 1. Lấy danh sách tất cả thành viên
+$members_result = $conn->query("SELECT id, stage_name FROM members ORDER BY stage_name ASC");
+
+// 2. Chuẩn bị câu lệnh để lấy ảnh cho từng thành viên (hiệu quả hơn)
+$photos_stmt = $conn->prepare("
+    SELECT id, image_url, caption 
+    FROM photos 
+    WHERE member_id = ? 
+    ORDER BY uploaded_at DESC
+");
+
+// Kiểm tra lỗi prepare statement
+if (!$photos_stmt) {
+    die("Lỗi chuẩn bị câu lệnh SQL lấy ảnh: " . $conn->error);
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -18,13 +26,14 @@ $result = $conn->query($sql);
     <meta charset="UTF-8">
     <title>Quản Lý Ảnh Gallery | Admin</title>
     <link rel="stylesheet" href="../../css/styleAdmin.css">
+    <link rel="stylesheet" href="../../css/styleAdminPhotos.css">  
     <link rel="icon" type="image/png" href="../../images/favicon.png">
 </head>
 
 <body>
     <div class="video-background">
         <video autoplay loop muted playsinline>
-            <source src="../../videos/1021.mp4" type="video/mp4">
+            <source src="../../videos/1021.mp4" type="video/mp4"> 
         </video>
     </div>
     <div class="container">
@@ -42,41 +51,49 @@ $result = $conn->query($sql);
             </a>
         </div>
 
-        <div class="table-container">
-            <table class="admin-table">
-                <thead>
-                    <tr>
-                        <th style="width: 15%;">Ảnh</th>
-                        <th style="width: 25%;">Thành Viên</th>
-                        <th style="width: 40%;">Chú Thích</th>
-                        <th style="width: 20%; text-align: center;">Hành động</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if ($result->num_rows > 0): ?>
-                        <?php while ($row = $result->fetch_assoc()): ?>
-                            <tr>
-                                <td>
-                                    <img src="../../images/photos/<?= htmlspecialchars($row['image_url']) ?>" alt="<?= htmlspecialchars($row['caption']) ?>" class="table-thumbnail">
-                                </td>
-                                <td><?= htmlspecialchars($row['stage_name']) ?></td>
-                                <td><?= htmlspecialchars($row['caption']) ?></td>
-                                <td class="actions">
-                                    <a href="edit.php?id=<?= $row['id'] ?>" class="action-btn edit">Sửa</a>
-                                    <a href="delete.php?id=<?= $row['id'] ?>" class="action-btn delete" onclick="return confirm('Bạn có chắc chắn muốn xóa ảnh này không?');">Xóa</a>
-                                </td>
-                            </tr>
-                        <?php endwhile; ?>
-                    <?php else: ?>
-                        <tr>
-                            <td colspan="4" class="empty-cell">Chưa có ảnh nào trong gallery.</td>
-                        </tr>
-                    <?php endif; ?>
-                </tbody>
-            </table>
+        <div class="photos-by-member-container">
+            <?php if ($members_result && $members_result->num_rows > 0): ?>
+                <?php while ($member = $members_result->fetch_assoc()): ?>
+                    <?php
+                    // Lấy ảnh cho thành viên hiện tại
+                    $member_id = $member['id'];
+                    $photos_stmt->bind_param("i", $member_id);
+                    $photos_stmt->execute();
+                    $photos_result = $photos_stmt->get_result();
+                    ?>
+                    
+                    <div class="member-photo-group">
+                        <h2 class="member-group-title"><?= htmlspecialchars($member['stage_name']) ?> (<?= $photos_result->num_rows ?> ảnh)</h2>
+                        
+                        <?php if ($photos_result && $photos_result->num_rows > 0): ?>
+                            <div class="photo-admin-grid"> <?php while ($photo = $photos_result->fetch_assoc()): ?>
+                                    <div class="photo-admin-card">
+                                        <img src="../../images/photos/<?= htmlspecialchars($photo['image_url']) ?>" alt="<?= htmlspecialchars($photo['caption']) ?>">
+                                        <div class="photo-admin-info">
+                                            <p class="caption"><?= htmlspecialchars($photo['caption'] ?: '(Không có chú thích)') ?></p> 
+                                        </div>
+                                        <div class="photo-admin-actions">
+                                            <a href="edit.php?id=<?= $photo['id'] ?>" class="edit">Sửa</a>
+                                            <a href="delete.php?id=<?= $photo['id'] ?>" class="delete" onclick="return confirm('Bạn có chắc chắn muốn xóa ảnh này không?');">Xóa</a>
+                                        </div>
+                                    </div>
+                                <?php endwhile; ?>
+                            </div>
+                        <?php else: ?>
+                            <p class="empty-group-message">Chưa có ảnh nào cho thành viên này.</p>
+                        <?php endif; ?>
+                        <?php if($photos_result) $photos_result->close(); // Đóng kết quả ảnh của thành viên này ?>
+                    </div> <?php endwhile; ?>
+            <?php else: ?>
+                <p>Chưa có thành viên nào trong hệ thống.</p>
+            <?php endif; ?>
         </div>
-    </div>
-    <script src="../../js/app.js"></script>
+        </div>
+    <script src="../../js/app.js"></script> 
 </body>
-
 </html>
+<?php 
+if($photos_stmt) $photos_stmt->close(); // Đóng câu lệnh prepare ảnh
+if($members_result) $members_result->close(); // Đóng kết quả thành viên
+$conn->close(); 
+?>

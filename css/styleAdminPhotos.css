@@ -1,0 +1,84 @@
+/* --- CSS CHO TRANG QUẢN LÝ ẢNH (ADMIN) --- */
+
+/* CSS CHO PHÂN NHÓM */
+.member-photo-group {
+    margin-bottom: 40px; /* Khoảng cách giữa các nhóm thành viên */
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color); /* Đường kẻ phân cách */
+}
+.member-photo-group:last-child {
+    border-bottom: none; /* Bỏ đường kẻ cuối cùng */
+    margin-bottom: 0;
+}
+.member-group-title {
+    text-align: left; /* Căn trái tiêu đề tên thành viên */
+    text-shadow: none;
+    margin-bottom: 20px;
+    color: var(--accent-color); /* Màu tím cho tên */
+    font-size: 1.5em;
+}
+.empty-group-message {
+    text-align: center;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+/* CSS CHO GRID ADMIN */
+.photo-admin-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* Tạo các cột ~180px */
+    gap: 20px;
+}
+.photo-admin-card {
+    background-color: #1a1a1a;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative; /* Để định vị nút xóa/sửa */
+    transition: box-shadow 0.3s ease;
+}
+.photo-admin-card:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+.photo-admin-card img {
+    width: 100%;
+    height: 180px; /* Chiều cao cố định cho ảnh thumbnail */
+    object-fit: cover;
+    display: block;
+}
+.photo-admin-info {
+    padding: 10px;
+    font-size: 0.85em;
+}
+.photo-admin-info .caption {
+    color: var(--text-secondary);
+    margin: 0;
+    display: -webkit-box; /* Giới hạn caption thành 2 dòng */
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+    min-height: 2.6em; /* Đảm bảo đủ chỗ cho 2 dòng */
+}
+.photo-admin-actions {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: flex;
+    gap: 5px;
+    background-color: rgba(0,0,0,0.6);
+    padding: 5px;
+    border-radius: 5px;
+    opacity: 0; /* Ẩn nút đi */
+    transition: opacity 0.3s ease;
+}
+.photo-admin-card:hover .photo-admin-actions {
+    opacity: 1; /* Hiện nút khi hover vào card */
+}
+.photo-admin-actions a {
+    color: #fff;
+    padding: 3px 6px;
+    font-size: 0.75em;
+    border-radius: 3px;
+    text-decoration: none;
+}
+.photo-admin-actions a.edit { background-color: #3498db; }
+.photo-admin-actions a.delete { background-color: #e74c3c; }
