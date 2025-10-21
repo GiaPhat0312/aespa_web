@@ -1,0 +1,53 @@
+/*
+=========================================
+--- CSS FIX: CĂN GIỮA & CHỐNG TRÀN ---
+=========================================
+*/
+
+/* 1. Ép toàn bộ trang KHÔNG ĐƯỢC cuộn ngang */
+/* Đây là cách "mạnh tay" nhất để fix lỗi lệch trái */
+html, 
+body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+/* 2. Đảm bảo container chính LUÔN được căn giữa */
+.container {
+    width: 90%; /* Dùng 90% chiều rộng trên mobile */
+    max-width: 1200px; /* Giới hạn 1200px trên desktop */
+    margin-left: auto !important;  /* Thêm !important để ép căn giữa */
+    margin-right: auto !important; /* Thêm !important để ép căn giữa */
+    box-sizing: border-box; 
+    float: none !important; /* Hủy các lệnh float (nếu có) */
+}
+
+/* 3. Đảm bảo các element bên trong không bị tràn */
+img, 
+video,
+iframe,
+.album-cover img,
+.news-image,
+.post-full-image {
+    max-width: 100% !important; /* Ép mọi ảnh/video phải vừa 100% */
+    height: auto;
+}
+
+/* 4. Ép chữ/link quá dài phải tự xuống dòng */
+h1, h2, h3, p, a, li, 
+.post-body, .comment-body, .track-title {
+    overflow-wrap: break-word; /* Tự động bẻ gãy từ quá dài */
+    word-wrap: break-word;
+    word-break: break-word; /* Ngắt từ mạnh hơn */
+}
+
+/* 5. Fix cho bảng (nếu có) */
+/* (Phần này bạn đã có từ trước, nhưng để đây cho chắc) */
+.table-container,
+.admin-table,
+table {
+    max-width: 100%;
+    display: block;
+    overflow-x: auto; /* Cho phép bảng cuộn ngang, thay vì làm vỡ layout */
+    white-space: nowrap; 
+}

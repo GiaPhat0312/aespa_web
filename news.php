@@ -27,6 +27,7 @@ $result = $conn->query($sql);
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>aespa News | Fanpage</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/png" href="images/favicon.png">
@@ -94,5 +95,6 @@ $result = $conn->query($sql);
     <script src="js/transitions.js"></script>
     <script src="js/header_updater.js"></script>
     <script src="js/merch-modal.js"></script>
+    <script src="js/mobile-nav.js"></script>
 </body>
 </html>

@@ -6,6 +6,7 @@ $result = $conn->query("SELECT id, term, summary, image FROM lore_entries ORDER 
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>aespa Universe (Lore) | Fanpage</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/png" href="images/favicon.png">
@@ -40,5 +41,6 @@ $result = $conn->query("SELECT id, term, summary, image FROM lore_entries ORDER 
             </div>
         </div>
     </main>
+    <script src="js/mobile-nav.js"></script>
     </body>
 </html>

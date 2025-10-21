@@ -30,6 +30,7 @@ $comments_result = $comments_stmt->get_result();
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars($post['title']) ?> | aespa News</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/png" href="images/favicon.png">
@@ -120,6 +121,7 @@ $comments_result = $comments_stmt->get_result();
 
     <script src="js/header_updater.js"></script>
     <script src="js/merch-modal.js"></script>
+    <script src="js/mobile-nav.js"></script>
 </body>
 
 </html>

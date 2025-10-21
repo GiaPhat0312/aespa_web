@@ -118,6 +118,7 @@ $comments_result = $comments_stmt->get_result();
     <script src="https://unpkg.com/swup@4"></script>
     <script src="js/transitions.js"></script>
     <script src="js/header_updater.js"></script>
+    <script src="js/mobile-nav.js"></script>
 
 </body>
 </html>

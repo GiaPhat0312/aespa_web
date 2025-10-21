@@ -17,6 +17,7 @@ if (isset($_GET['category']) && !empty($_GET['category'])) {
 <html lang="vi">
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bộ Sưu Tập | aespa Fanpage</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/png" href="images/favicon.png">
@@ -88,6 +89,7 @@ if (isset($_GET['category']) && !empty($_GET['category'])) {
     <script src="js/transitions.js"></script>
     <script src="js/header_updater.js"></script>
     <script src="js/merch-modal.js"></script>
+    <script src="js/mobile-nav.js"></script>
 </body>
 
 </html>

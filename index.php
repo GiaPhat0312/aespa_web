@@ -18,6 +18,7 @@ $result_members = $conn->query($sql_members);
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/styleMobile.css">
     <link rel="icon" type="image/png" href="images/favicon.png">
 </head>
 <body>
@@ -32,7 +33,7 @@ $result_members = $conn->query($sql_members);
     <?php include 'partials/header.php'; ?>
     <main id="swup" class="transition-fade">
         <div class="container">
-            <h1>Welcome to the SYNK: <?php echo htmlspecialchars($aespa['name']); ?></h1>
+            <h1 class="index-title">Welcome to the SYNK: <?php echo htmlspecialchars($aespa['name']); ?></h1>
 
             <div class="group-info">
                 <img src="images/<?php echo htmlspecialchars($aespa['group_image']); ?>" alt="Ảnh nhóm aespa">
@@ -55,7 +56,7 @@ $result_members = $conn->query($sql_members);
                 </a>
             </div>
 
-            <h2>M Y, Æ S P A</h2>
+            <h2 class="section-title">M Y, Æ S P A</h2>
             <div class="members-grid">
                 <?php if ($result_members->num_rows > 0): ?>
                     <?php while ($member = $result_members->fetch_assoc()): ?>
@@ -80,6 +81,7 @@ $result_members = $conn->query($sql_members);
     <script src="https://unpkg.com/swup@4"></script>
     <script src="js/transitions.js"></script>
     <script src="js/header_updater.js"></script>
+    <script src="js/mobile-nav.js"></script>
 
 </body>
 </html>
