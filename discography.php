@@ -21,8 +21,13 @@ $result_albums = $conn->query($sql_albums);
 </head>
 
 <body>
-    <div id="particles-js"></div>
-    
+    <div class="video-background">
+        <video autoplay loop muted playsinline>
+            <source src="videos/1021.mp4" type="video/mp4">
+            Trình duyệt của bạn không hỗ trợ video tag.
+        </video>
+    </div>
+
     <?php include 'partials/header.php'; ?>
 
     <main id="swup" class="transition-fade">

@@ -67,7 +67,7 @@ $post = $result->fetch_assoc();
     <meta charset="UTF-8">
     <title>Sửa Bài Viết | Admin</title>
     <link rel="stylesheet" href="../css/styleAdmin.css">
-    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="icon" type="image/png" href="../images/favicon.png">
 </head>
 
 <body>

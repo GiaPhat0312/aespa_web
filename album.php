@@ -26,6 +26,7 @@ $result_tracks = $stmt_tracks->get_result();
 
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,8 +38,14 @@ $result_tracks = $stmt_tracks->get_result();
     <link rel="stylesheet" href="css/styleDiscography.css">
     <link rel="icon" type="image/png" href="images/favicon.png">
 </head>
+
 <body>
-    <div id="particles-js"></div>
+    <div class="video-background">
+        <video autoplay loop muted playsinline>
+            <source src="videos/1021.mp4" type="video/mp4">
+            Trình duyệt của bạn không hỗ trợ video tag.
+        </video>
+    </div>
 
     <?php include 'partials/header.php'; ?>
 
@@ -64,7 +71,7 @@ $result_tracks = $stmt_tracks->get_result();
                 <?php
                 if ($result_tracks->num_rows > 0) {
                     $track_number = 1;
-                    while($track = $result_tracks->fetch_assoc()) {
+                    while ($track = $result_tracks->fetch_assoc()) {
                         echo '<li class="tracklist-item">';
                         echo '  <span class="track-number">' . str_pad($track_number, 2, '0', STR_PAD_LEFT) . '</span>';
                         echo '  <span class="track-title">' . htmlspecialchars($track['title']);
@@ -90,6 +97,7 @@ $result_tracks = $stmt_tracks->get_result();
     <script src="js/transitions.js"></script>
     <script src="js/header_updater.js"></script>
 </body>
+
 </html>
 <?php
 $stmt_album->close();

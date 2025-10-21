@@ -15,13 +15,20 @@ if (isset($_GET['category']) && !empty($_GET['category'])) {
 ?>
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <title>Bộ Sưu Tập | aespa Fanpage</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/png" href="images/favicon.png">
 </head>
+
 <body>
-    <div id="particles-js"></div>
+    <div class="video-background">
+        <video autoplay loop muted playsinline>
+            <source src="videos/1021.mp4" type="video/mp4">
+            Trình duyệt của bạn không hỗ trợ video tag.
+        </video>
+    </div>
     <?php include 'partials/header.php'; ?>
     <main id="swup" class="transition-fade">
         <div class="container">
@@ -39,13 +46,13 @@ if (isset($_GET['category']) && !empty($_GET['category'])) {
 
             <div class="merch-grid">
                 <?php if ($result->num_rows > 0): ?>
-                    <?php while($item = $result->fetch_assoc()): ?>
-                        <div class="merch-card" 
-                             data-name="<?= htmlspecialchars($item['name']) ?>"
-                             data-category="<?= htmlspecialchars($item['category']) ?>"
-                             data-image="images/merch/<?= htmlspecialchars($item['image']) ?>"
-                             data-description="<?= htmlspecialchars($item['description']) ?>"
-                             data-release="<?= !empty($item['release_date']) ? date("d/m/Y", strtotime($item['release_date'])) : 'N/A' ?>">
+                    <?php while ($item = $result->fetch_assoc()): ?>
+                        <div class="merch-card"
+                            data-name="<?= htmlspecialchars($item['name']) ?>"
+                            data-category="<?= htmlspecialchars($item['category']) ?>"
+                            data-image="images/merch/<?= htmlspecialchars($item['image']) ?>"
+                            data-description="<?= htmlspecialchars($item['description']) ?>"
+                            data-release="<?= !empty($item['release_date']) ? date("d/m/Y", strtotime($item['release_date'])) : 'N/A' ?>">
                             <img src="images/merch/<?= htmlspecialchars($item['image']) ?>" alt="<?= htmlspecialchars($item['name']) ?>">
                             <div class="merch-info">
                                 <h3><?= htmlspecialchars($item['name']) ?></h3>
@@ -59,7 +66,7 @@ if (isset($_GET['category']) && !empty($_GET['category'])) {
             </div>
         </div>
     </main>
-    
+
     <div class="merch-modal" id="merchModal">
         <div class="modal-content">
             <button class="modal-close" id="modalClose">&times;</button>
@@ -80,6 +87,7 @@ if (isset($_GET['category']) && !empty($_GET['category'])) {
     <script src="https://unpkg.com/swup@4"></script>
     <script src="js/transitions.js"></script>
     <script src="js/header_updater.js"></script>
-    <script src="js/merch-modal.js"></script> 
+    <script src="js/merch-modal.js"></script>
 </body>
+
 </html>
