@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
         $target_dir = "../../images/lore/"; // Sửa thư mục ảnh
         $image_name = time() . '_' . basename($_FILES["image"]["name"]);
-        
+
         if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_dir . $image_name)) {
             // Xóa ảnh cũ
             if (!empty($old_image) && file_exists($target_dir . $old_image)) {
@@ -58,6 +58,7 @@ $entry = $result->fetch_assoc();
 ?>
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <title>Sửa Mục Lore | Admin</title>
@@ -65,10 +66,18 @@ $entry = $result->fetch_assoc();
     <script src="https://cdn.tiny.cloud/1/YOUR_API_KEY/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="../js/tinymce-init.js"></script>
 </head>
+
 <body>
+    <div class="video-background">
+        <video autoplay loop muted playsinline>
+            <source src="../../videos/1021.mp4" type="video/mp4">
+        </video>
+    </div>
     <div class="container">
         <div class="back-link-container"><a href="manage.php" class="back-link">Quay lại Quản lý Lore</a></div>
-        <div class="admin-header"><h1>Sửa Mục Lore</h1></div>
+        <div class="admin-header">
+            <h1>Sửa Mục Lore</h1>
+        </div>
         <?= $message; ?>
         <form action="edit.php?id=<?= $entry_id ?>" method="POST" enctype="multipart/form-data" class="admin-form">
             <div class="form-grid">
@@ -105,4 +114,5 @@ $entry = $result->fetch_assoc();
     </div>
     <script src="../../js/image-preview.js"></script>
 </body>
+
 </html>

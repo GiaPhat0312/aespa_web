@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
         $target_dir = "../../images/merch/";
         $image_name = time() . '_' . uniqid() . '_' . basename($_FILES["image"]["name"]);
-        
+
         if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_dir . $image_name)) {
             if (!empty($old_image) && file_exists($target_dir . $old_image)) {
                 unlink($target_dir . $old_image);
@@ -59,6 +59,7 @@ $item = $result->fetch_assoc();
 ?>
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <title>Sửa Vật Phẩm | Admin</title>
@@ -66,10 +67,16 @@ $item = $result->fetch_assoc();
     <link rel="icon" type="image/png" href="../../images/favicon.png">
 </head>
 <body>
-    <div id="particles-js"></div>
+    <div class="video-background">
+        <video autoplay loop muted playsinline>
+            <source src="../../videos/1021.mp4" type="video/mp4">
+        </video>
+    </div>
     <div class="container">
         <div class="back-link-container"><a href="manage.php" class="back-link">Quay lại Quản lý</a></div>
-        <div class="admin-header"><h1>Sửa Vật Phẩm</h1></div>
+        <div class="admin-header">
+            <h1>Sửa Vật Phẩm</h1>
+        </div>
         <?= $message; ?>
 
         <form action="edit.php?id=<?= $item_id ?>" method="POST" enctype="multipart/form-data" class="admin-form">
@@ -116,7 +123,7 @@ $item = $result->fetch_assoc();
             </div>
         </form>
     </div>
-    
+
     <script src="../../js/app.js"></script>
     <script>
         // --- LOGIC XEM TRƯỚC ẢNH LIVE ---
@@ -139,4 +146,5 @@ $item = $result->fetch_assoc();
         });
     </script>
 </body>
+
 </html>

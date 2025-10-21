@@ -95,7 +95,11 @@ $tracks = $result_tracks->fetch_all(MYSQLI_ASSOC);
 </head>
 
 <body>
-    <div id="particles-js"></div>
+    <div class="video-background">
+        <video autoplay loop muted playsinline>
+            <source src="../videos/1021.mp4" type="video/mp4">
+        </video>
+    </div>
     <div class="container">
         <div class="back-link-container">
             <a href="manage_albums.php" class="back-link">Quay lại Quản lý Album</a>

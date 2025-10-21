@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $target_dir = "../images/news/";
         $image_name = time() . '_' . basename($_FILES["image"]["name"]);
         $target_file = $target_dir . $image_name;
-        
+
         if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
             // Xóa ảnh cũ nếu upload ảnh mới thành công và ảnh cũ tồn tại
             if (!empty($old_image) && file_exists($target_dir . $old_image)) {
@@ -62,14 +62,20 @@ $post = $result->fetch_assoc();
 
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <title>Sửa Bài Viết | Admin</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/styleAdmin.css">
     <link rel="icon" type="image/png" href="images/favicon.png">
 </head>
+
 <body>
-    <div id="particles-js"></div>
+    <div class="video-background">
+        <video autoplay loop muted playsinline>
+            <source src="../videos/1021.mp4" type="video/mp4">
+        </video>
+    </div>
     <div class="container">
         <div class="back-link-container">
             <a href="manage_news.php" class="back-link">Quay lại Quản lý Tin tức</a>
@@ -90,7 +96,7 @@ $post = $result->fetch_assoc();
                 <label for="image">Ảnh minh họa (để trống nếu không muốn đổi):</label>
                 <input type="file" id="image" name="image" accept="image/*">
                 <input type="hidden" name="old_image" value="<?= htmlspecialchars($post['image']) ?>">
-                
+
                 <?php if (!empty($post['image'])): ?>
                     <div class="current-image-info">
                         <p>Ảnh hiện tại:</p>
@@ -102,4 +108,5 @@ $post = $result->fetch_assoc();
         </form>
     </div>
 </body>
+
 </html>

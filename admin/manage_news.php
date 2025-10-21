@@ -5,14 +5,20 @@ $result = $conn->query("SELECT id, title, created_at FROM news ORDER BY created_
 ?>
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <title>Quản Lý Tin Tức | Admin</title>
     <link rel="stylesheet" href="../css/styleAdmin.css">
-    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="icon" type="image/png" href="../images/favicon.png">
 </head>
+
 <body>
-    <div id="particles-js"></div>
+    <div class="video-background">
+        <video autoplay loop muted playsinline>
+            <source src="../videos/1021.mp4" type="video/mp4">
+        </video>
+    </div>
     <div class="container">
         <div class="back-link-container">
             <a href="index.php" class="back-link">Về Dashboard</a>
@@ -31,17 +37,18 @@ $result = $conn->query("SELECT id, title, created_at FROM news ORDER BY created_
             </thead>
             <tbody>
                 <?php while ($row = $result->fetch_assoc()): ?>
-                <tr>
-                    <td><?= htmlspecialchars($row['title']) ?></td>
-                    <td><?= date("d/m/Y H:i", strtotime($row['created_at'])) ?></td>
-                    <td class="actions">
-                        <a href="edit_news.php?id=<?= $row['id'] ?>" class="action-btn edit">Sửa</a>
-                        <a href="delete_news.php?id=<?= $row['id'] ?>" class="action-btn delete" onclick="return confirm('Bạn có chắc chắn muốn xóa bài viết này không?');">Xóa</a>
-                    </td>
-                </tr>
+                    <tr>
+                        <td><?= htmlspecialchars($row['title']) ?></td>
+                        <td><?= date("d/m/Y H:i", strtotime($row['created_at'])) ?></td>
+                        <td class="actions">
+                            <a href="edit_news.php?id=<?= $row['id'] ?>" class="action-btn edit">Sửa</a>
+                            <a href="delete_news.php?id=<?= $row['id'] ?>" class="action-btn delete" onclick="return confirm('Bạn có chắc chắn muốn xóa bài viết này không?');">Xóa</a>
+                        </td>
+                    </tr>
                 <?php endwhile; ?>
             </tbody>
         </table>
     </div>
 </body>
+
 </html>

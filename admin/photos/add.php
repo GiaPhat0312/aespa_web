@@ -11,12 +11,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Kiểm tra đã chọn thành viên chưa
     if (empty($member_id)) {
         $message = '<div class="message error">Vui lòng chọn thành viên.</div>';
-    } 
+    }
     // Kiểm tra đã chọn ảnh chưa
     else if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
         $target_dir = "../../images/photos/"; // Thư mục lưu ảnh gallery cá nhân
         if (!is_dir($target_dir)) mkdir($target_dir, 0755, true);
-        
+
         $image_name = time() . '_' . basename($_FILES["image"]["name"]);
 
         if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_dir . $image_name)) {
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bind_param("iss", $member_id, $caption, $image_name);
 
             if ($stmt->execute()) {
-                header("Location: manage.php"); 
+                header("Location: manage.php");
                 exit();
             } else {
                 $message = '<div class="message error">Lỗi database: ' . $stmt->error . '</div>';
@@ -41,17 +41,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <title>Thêm Ảnh Mới | Admin</title>
     <link rel="stylesheet" href="../../css/styleAdmin.css">
     <link rel="icon" type="image/png" href="../../images/favicon.png">
 </head>
+
 <body>
-    <div id="particles-js"></div>
+    <div class="video-background">
+        <video autoplay loop muted playsinline>
+            <source src="../../videos/1021.mp4" type="video/mp4">
+        </video>
+    </div>
     <div class="container">
         <div class="back-link-container"><a href="manage.php" class="back-link">Quay lại Quản lý</a></div>
-        <div class="admin-header"><h1>Thêm Ảnh Mới Vào Gallery</h1></div>
+        <div class="admin-header">
+            <h1>Thêm Ảnh Mới Vào Gallery</h1>
+        </div>
         <?= $message; ?>
         <form action="add.php" method="POST" enctype="multipart/form-data" class="admin-form">
             <div class="form-grid">
@@ -89,4 +97,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
     <script src="../../js/image-preview.js"></script>
 </body>
+
 </html>

@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // 3. Xử lý và thêm danh sách bài hát (tracks)
         if (!empty($_POST['tracks'])) {
             $stmt_track = $conn->prepare("INSERT INTO tracks (album_id, title, is_title_track) VALUES (?, ?, ?)");
-            
+
             foreach ($_POST['tracks'] as $index => $track_title) {
                 if (!empty($track_title)) {
                     // Kiểm tra xem bài hát này có phải là bài hát chủ đề không
@@ -52,7 +52,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Nếu mọi thứ thành công, commit transaction
         $conn->commit();
         $message = '<div class="message success">Thêm album và tracklist thành công!</div>';
-
     } catch (Exception $e) {
         // Nếu có lỗi, rollback lại tất cả thay đổi
         $conn->rollback();
@@ -63,14 +62,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <title>Thêm Album Mới | Admin</title>
     <link rel="stylesheet" href="../css/styleAdmin.css">
-    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="icon" type="image/png" href="../images/favicon.png">
 </head>
+
 <body>
-    <div id="particles-js"></div>
+    <div class="video-background">
+        <video autoplay loop muted playsinline>
+            <source src="../videos/1021.mp4" type="video/mp4">
+        </video>
+    </div>
     <div class="container">
         <div class="back-link-container">
             <a href="manage_albums.php" class="back-link">Quay lại Quản lý Album</a>
@@ -107,7 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="form-group">
                 <label>Tracklist:</label>
                 <div id="tracklist-container">
-                    </div>
+                </div>
                 <button type="button" id="add-track-btn" class="button-add-track">+ Thêm bài hát</button>
             </div>
             <button type="submit" class="form-button">Lưu Album và Tracklist</button>
@@ -125,7 +130,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             function addTrackField(isFirst = false) {
                 const trackDiv = document.createElement('div');
                 trackDiv.className = 'track-item';
-                
+
                 trackDiv.innerHTML = `
                     <input type="text" name="tracks[]" placeholder="Tên bài hát #${trackIndex + 1}" required>
                     <label class="radio-label">
@@ -134,7 +139,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </label>
                     <button type="button" class="remove-track-btn">&times;</button>
                 `;
-                
+
                 container.appendChild(trackDiv);
                 trackIndex++;
 
@@ -154,4 +159,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         });
     </script>
 </body>
+
 </html>

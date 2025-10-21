@@ -5,7 +5,7 @@ $message = '';
 
 // Lấy ID ảnh từ URL
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
-    header("Location: manage.php"); 
+    header("Location: manage.php");
     exit();
 }
 $photo_id = intval($_GET['id']);
@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
         $target_dir = "../../images/photos/";
         $image_name = time() . '_' . basename($_FILES["image"]["name"]);
-        
+
         if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_dir . $image_name)) {
             // Xóa ảnh cũ
             if (!empty($old_image) && file_exists($target_dir . $old_image)) {
@@ -52,23 +52,31 @@ $stmt->execute();
 $result = $stmt->get_result();
 $photo = $result->fetch_assoc();
 if (!$photo) { // Nếu không tìm thấy ảnh
-    header("Location: manage.php"); 
-    exit(); 
+    header("Location: manage.php");
+    exit();
 }
 ?>
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <title>Sửa Ảnh | Admin</title>
     <link rel="stylesheet" href="../../css/styleAdmin.css">
     <link rel="icon" type="image/png" href="../../images/favicon.png">
 </head>
+
 <body>
-    <div id="particles-js"></div>
+    <div class="video-background">
+        <video autoplay loop muted playsinline>
+            <source src="../../videos/1021.mp4" type="video/mp4">
+        </video>
+    </div>
     <div class="container">
         <div class="back-link-container"><a href="manage.php" class="back-link">Quay lại Quản lý</a></div>
-        <div class="admin-header"><h1>Sửa Ảnh Gallery</h1></div>
+        <div class="admin-header">
+            <h1>Sửa Ảnh Gallery</h1>
+        </div>
         <?= $message; ?>
         <form action="edit.php?id=<?= $photo_id ?>" method="POST" enctype="multipart/form-data" class="admin-form">
             <div class="form-grid">
@@ -107,4 +115,5 @@ if (!$photo) { // Nếu không tìm thấy ảnh
     </div>
     <script src="../../js/image-preview.js"></script>
 </body>
+
 </html>

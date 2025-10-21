@@ -20,6 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($password, $user['password'])) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $username;
+            $_SESSION['flash_message'] = "Đăng nhập thành công! Chào mừng, " . htmlspecialchars($username) . ".";
             header("Location: admin/index.php");
             exit();
         } else {

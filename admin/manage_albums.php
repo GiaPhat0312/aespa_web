@@ -15,11 +15,15 @@ $result = $conn->query($sql);
     <meta charset="UTF-8">
     <title>Quản Lý Album | Admin</title>
     <link rel="stylesheet" href="../css/styleAdmin.css">
-    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="icon" type="image/png" href="../images/favicon.png">
 </head>
 
 <body>
-    <div id="particles-js"></div>
+    <div class="video-background">
+        <video autoplay loop muted playsinline>
+            <source src="../videos/1021.mp4" type="video/mp4">
+        </video>
+    </div>
 
     <div class="container">
         <div class="back-link-container">

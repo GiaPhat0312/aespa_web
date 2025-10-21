@@ -1,4 +1,11 @@
 <?php require_once 'auth.php'; // Gọi "lính gác" để kiểm tra đăng nhập 
+$message = ''; // Khởi tạo biến message
+if (isset($_SESSION['flash_message'])) {
+    // Nếu có tin nhắn, gán nó vào biến $message
+    $message = '<div class="message success">' . $_SESSION['flash_message'] . '</div>';
+    // Xóa tin nhắn khỏi session để nó không hiện lại
+    unset($_SESSION['flash_message']);
+}
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -11,10 +18,14 @@
 </head>
 
 <body>
-    <div id="particles-js"></div>
+    <div class="video-background">
+        <video autoplay loop muted playsinline>
+            <source src="../videos/1021.mp4" type="video/mp4">
+        </video>
+    </div>
     <div class="container">
         <h1>Trang Quản Lý</h1>
-        <p style="text-align: center; color: var(--text-secondary);">
+        <?= $message; ?><p style="text-align: center; color: var(--text-secondary);">
             Xin chào, <strong><?php echo htmlspecialchars($_SESSION['username']); ?></strong>!
         </p>
 

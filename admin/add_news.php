@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (!is_dir($target_dir)) mkdir($target_dir, 0755, true);
         $image_name = time() . '_' . uniqid() . '_' . basename($_FILES["image"]["name"]);
         $target_file = $target_dir . $image_name;
-        
+
         if (!move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
             $message = '<div class="message error">Lỗi upload ảnh.</div>';
         }
@@ -33,20 +33,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <title>Viết Bài Mới | Admin</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/styleAdmin.css">
     <link rel="icon" type="image/png" href="../images/favicon.png">
     <script src="https://cdn.tiny.cloud/1/hjowki370hh43n6kth3994fybjp6j101fdvq2uj8fq1ipc9z/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
+
 <body>
-    <div id="particles-js"></div>
+    <div class="video-background">
+        <video autoplay loop muted playsinline>
+            <source src="../videos/1021.mp4" type="video/mp4">
+        </video>
+    </div>
     <div class="container">
         <div class="back-link-container">
             <a href="manage_news.php" class="back-link">Quay lại Quản lý</a>
         </div>
-        
+
         <div class="admin-header">
             <h1>Viết Bài Mới</h1>
         </div>
@@ -83,7 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </form>
     </div>
-    
+
     <script src="../js/app.js"></script>
     <script>
         // --- 1. KHỞI TẠO TRÌNH SOẠN THẢO VĂN BẢN ---
@@ -119,4 +125,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         });
     </script>
 </body>
+
 </html>

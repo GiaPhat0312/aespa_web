@@ -13,14 +13,20 @@ $result = $conn->query($sql);
 ?>
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <title>Quản Lý Ảnh Gallery | Admin</title>
     <link rel="stylesheet" href="../../css/styleAdmin.css">
     <link rel="icon" type="image/png" href="../../images/favicon.png">
 </head>
+
 <body>
-    <div id="particles-js"></div>
+    <div class="video-background">
+        <video autoplay loop muted playsinline>
+            <source src="../../videos/1021.mp4" type="video/mp4">
+        </video>
+    </div>
     <div class="container">
         <div class="back-link-container">
             <a href="../index.php" class="back-link">Về Dashboard</a>
@@ -29,11 +35,13 @@ $result = $conn->query($sql);
         <div class="admin-header">
             <h1>Quản Lý Ảnh Gallery</h1>
             <a href="add.php" class="button-add">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+                </svg>
                 <span>Thêm Ảnh Mới</span>
             </a>
         </div>
-        
+
         <div class="table-container">
             <table class="admin-table">
                 <thead>
@@ -47,17 +55,17 @@ $result = $conn->query($sql);
                 <tbody>
                     <?php if ($result->num_rows > 0): ?>
                         <?php while ($row = $result->fetch_assoc()): ?>
-                        <tr>
-                            <td>
-                                <img src="../../images/photos/<?= htmlspecialchars($row['image_url']) ?>" alt="<?= htmlspecialchars($row['caption']) ?>" class="table-thumbnail">
-                            </td>
-                            <td><?= htmlspecialchars($row['stage_name']) ?></td>
-                            <td><?= htmlspecialchars($row['caption']) ?></td>
-                            <td class="actions">
-                                <a href="edit.php?id=<?= $row['id'] ?>" class="action-btn edit">Sửa</a>
-                                <a href="delete.php?id=<?= $row['id'] ?>" class="action-btn delete" onclick="return confirm('Bạn có chắc chắn muốn xóa ảnh này không?');">Xóa</a>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>
+                                    <img src="../../images/photos/<?= htmlspecialchars($row['image_url']) ?>" alt="<?= htmlspecialchars($row['caption']) ?>" class="table-thumbnail">
+                                </td>
+                                <td><?= htmlspecialchars($row['stage_name']) ?></td>
+                                <td><?= htmlspecialchars($row['caption']) ?></td>
+                                <td class="actions">
+                                    <a href="edit.php?id=<?= $row['id'] ?>" class="action-btn edit">Sửa</a>
+                                    <a href="delete.php?id=<?= $row['id'] ?>" class="action-btn delete" onclick="return confirm('Bạn có chắc chắn muốn xóa ảnh này không?');">Xóa</a>
+                                </td>
+                            </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
                         <tr>
@@ -70,4 +78,5 @@ $result = $conn->query($sql);
     </div>
     <script src="../../js/app.js"></script>
 </body>
+
 </html>

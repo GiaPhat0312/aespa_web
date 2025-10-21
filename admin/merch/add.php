@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_param("sssss", $name, $category, $description, $image_name, $release_date);
 
         if ($stmt->execute()) {
-            header("Location: manage.php"); 
+            header("Location: manage.php");
             exit();
         } else {
             $message = '<div class="message error">Lỗi database: ' . $stmt->error . '</div>';
@@ -37,17 +37,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <title>Thêm Vật Phẩm Mới | Admin</title>
     <link rel="stylesheet" href="../../css/styleAdmin.css">
     <link rel="icon" type="image/png" href="../../images/favicon.png">
 </head>
+
 <body>
-    <div id="particles-js"></div>
+    <div class="video-background">
+        <video autoplay loop muted playsinline>
+            <source src="../../videos/1021.mp4" type="video/mp4">
+        </video>
+    </div>
     <div class="container">
         <div class="back-link-container"><a href="manage.php" class="back-link">Quay lại Quản lý</a></div>
-        <div class="admin-header"><h1>Thêm Vật Phẩm Mới</h1></div>
+        <div class="admin-header">
+            <h1>Thêm Vật Phẩm Mới</h1>
+        </div>
         <?= $message; ?>
         <div class="form-container">
             <form action="add.php" method="POST" enctype="multipart/form-data" class="admin-form">
@@ -83,4 +91,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
     <script src="../../js/app.js"></script>
 </body>
+
 </html>

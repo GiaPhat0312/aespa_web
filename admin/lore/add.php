@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Sửa lại SQL
         $stmt = $conn->prepare("INSERT INTO lore_entries (term, summary, full_description, image) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("ssss", $term, $summary, $full_description, $image_name);
-        
+
         if ($stmt->execute()) {
             header("Location: manage.php");
             exit();
@@ -38,6 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <title>Thêm Mục Lore | Admin</title>
     <link rel="stylesheet" href="../../css/styleAdmin.css">
@@ -45,9 +46,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="../js/tinymce-init.js"></script>
 </head>
 <body>
+    <div class="video-background">
+        <video autoplay loop muted playsinline>
+            <source src="../../videos/1021.mp4" type="video/mp4">
+        </video>
+    </div>
     <div class="container">
         <div class="back-link-container"><a href="manage.php" class="back-link">Quay lại Quản lý Lore</a></div>
-        <div class="admin-header"><h1>Thêm Mục Lore Mới</h1></div>
+        <div class="admin-header">
+            <h1>Thêm Mục Lore Mới</h1>
+        </div>
         <?= $message; ?>
         <form action="add.php" method="POST" enctype="multipart/form-data" class="admin-form">
             <div class="form-grid">
@@ -81,4 +89,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
     <script src="../../js/image-preview.js"></script>
 </body>
+
 </html>
