@@ -35,7 +35,7 @@ $result_albums = $conn->query($sql_albums);
             <div class="back-link-container">
                 <a href="index.php" class="back-link">Back to SYNK</a>
             </div>
-            <h1>Album Nhạc</h1>
+            <h1 class="index-title">Album Nhạc</h1>
 
             <div class="album-grid">
                 <?php

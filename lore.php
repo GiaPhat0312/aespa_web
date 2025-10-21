@@ -18,7 +18,7 @@ $result = $conn->query("SELECT id, term, summary, image FROM lore_entries ORDER 
     <?php include 'partials/header.php'; ?>
     <main id="swup" class="transition-fade">
         <div class="container">
-            <h1>Aespa Universe </h1>
+            <h1 class="section-title">Aespa Universe </h1>
             <p style="text-align: center; color: var(--text-secondary); margin-top: -20px;">
                 Vũ trụ aespa.
             </p>

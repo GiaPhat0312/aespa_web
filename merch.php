@@ -33,7 +33,7 @@ if (isset($_GET['category']) && !empty($_GET['category'])) {
     <?php include 'partials/header.php'; ?>
     <main id="swup" class="transition-fade">
         <div class="container">
-            <h1>Bộ sưu tập</h1>
+            <h1 class="index-title">Bộ sưu tập</h1>
             <p style="text-align: center; color: var(--text-secondary); margin-top: -20px; max-width: 600px; margin-left: auto; margin-right: auto;">
                 Khám phá bộ sưu tập các vật phẩm chính thức, từ lightstick biểu tượng đến những tấm photocard độc quyền.
             </p>
