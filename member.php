@@ -18,6 +18,18 @@ if ($result->num_rows === 0) {
     die("Không tìm thấy thành viên này.");
 }
 $member = $result->fetch_assoc();
+
+// === MÃ MỚI: LẤY ẢNH CÁ NHÂN ===
+$photo_sql = $conn->prepare("
+    SELECT id, member_id, image_url, caption 
+    FROM photos 
+    WHERE member_id = ? 
+    ORDER BY uploaded_at DESC
+");
+$photo_sql->bind_param("i", $member_id);
+$photo_sql->execute();
+$photos = $photo_sql->get_result();
+// ==================================
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +45,8 @@ $member = $result->fetch_assoc();
     <link rel="icon" type="image/png" href="images/favicon.png">
 </head>
 <body>
-    <div id="particles-js"></div>
+    <div class="video-background"> <video autoplay loop muted playsinline><source src="videos/bg-supernova.mp4" type="video/mp4"></video>
+    </div>
 
     <?php include 'partials/header.php'; ?>
     
@@ -54,16 +67,52 @@ $member = $result->fetch_assoc();
                     <p><b>Vị trí:</b> <?php echo htmlspecialchars($member['position']); ?></p>
                 </div>
             </div>
-        </div>
+
+            <?php if ($photos->num_rows > 0): ?>
+                <div class="member-photo-section">
+                    <h2>Ảnh</h2>
+                    <div class="merch-grid"> 
+                        <?php while($photo = $photos->fetch_assoc()): ?>
+                            <div class="merch-card" 
+                                 data-name="<?= htmlspecialchars($photo['caption']) ?>"
+                                 data-category="Photo"
+                                 data-image="images/photos/<?= htmlspecialchars($photo['image_url']) ?>"
+                                 data-description=""
+                                 data-release="">
+                                
+                                <img src="images/photos/<?= htmlspecialchars($photo['image_url']) ?>" alt="<?= htmlspecialchars($photo['caption']) ?>">
+                                <div class="merch-info">
+                                    <h3><?= htmlspecialchars($photo['caption']) ?></h3>
+                                </div>
+                            </div>
+                        <?php endwhile; ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+            </div>
     </main>
+
+    <div class="merch-modal" id="merchModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClosePhoto">&times;</button>
+            <div class="modal-body">
+                <img src="" alt="" id="modalImage">
+                <div class="modal-details">
+                    <h2 id="modalName"></h2>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="js/app.js"></script>
-
     <script src="https://unpkg.com/swup@4"></script>
     <script src="js/transitions.js"></script>
-
+    
+    <script src="js/header_updater.js"></script>
+    <script src="js/photo-modal.js"></script> 
     <?php
     $stmt->close();
+    $photos->close(); // Đóng kết quả truy vấn ảnh
     $conn->close();
     ?>
 </body>
